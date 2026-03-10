@@ -36,6 +36,10 @@ class App():
         self.Manager = pygame_gui.UIManager(self.window_size)
         self.window_surface = pygame.display.set_mode((self.window_size)) 
 
+    def connect_db(self,database):
+        self.conn = sqlite3.connect(database)
+        self.cursor = self.conn.cursor()
+
     def assign_widget_position(self, widget_size, x_rel_pos, y_rel_pos):
         window_height = self.window_height
         window_width = self.window_width
@@ -134,6 +138,11 @@ class App():
         if self.active_window == 'register_interface':
             self.active_window = 'main_interface'    
 
+    def register_account(self, username, password):
+        self.connect_db("Database.db")
+        self.cursor.execute("INSERT INTO User (Name, Hashed_Password) VALUES (?,?)",(username,password))
+        self.conn.commit ()
+
     def check_user_credentials(self, username, password):
         pass
 
@@ -158,7 +167,7 @@ class App():
         clock = pygame.time.Clock()
         self.build_main_interface()
         self.build_back_button()
-
+        self.register_account('un_test','pw_test')
         while True:
             time_delta = clock.tick(Framerate)
 
