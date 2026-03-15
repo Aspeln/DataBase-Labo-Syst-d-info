@@ -165,16 +165,15 @@ class App():
     def event_process(self,event):
         if event.type == pygame_gui.UI_TEXT_ENTRY_CHANGED:
             pass
-        if event.type == pygame_gui.UI_BUTTON_PRESSED:
+        if event.type == pygame_gui.UI_BUTTON_PRESSED:            
+            if self.active_window == 'main_interface':
+                if event.ui_element.text == "Login":
+                    self.active_window = 'login_interface'
+                    self.need_to_update_interface = True
+                if event.ui_element.text == "Register":
+                    self.active_window = 'register_interface'
+                    self.need_to_update_interface = True
             
-            
-            if event.ui_element.text == "Login":
-                self.active_window = 'login_interface'
-                self.need_to_update_interface = True
-            if event.ui_element.text == "Register":
-                self.active_window = 'register_interface'
-                self.need_to_update_interface = True
-
             if event.ui_element.text == self.back_button_text:
                 self.going_back()
 
