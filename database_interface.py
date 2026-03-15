@@ -43,8 +43,10 @@ class App():
     def assign_widget_position(self, widget_size, x_rel_pos, y_rel_pos):
         window_height = self.window_height
         window_width = self.window_width
-        x_pos = x_rel_pos * window_width - (widget_size[0] / 2)
-        y_pos = y_rel_pos * window_height - (widget_size[1] / 2)
+        widg_width = widget_size[0]
+        widg_height = widget_size[1]
+        x_pos = x_rel_pos * window_width - (widg_width / 2)
+        y_pos = y_rel_pos * window_height - (widg_height / 2)
         return (x_pos, y_pos)
     
     def interface_clear(self):
@@ -72,42 +74,55 @@ class App():
 
         user_label_text = "Please login to your account"
         login_button_text = "Login"
-        username_entry_placeholder = "Enter your username"
+        user_name_entry_placeholder = "Enter your username"
         password_entry_placeholder = "Enter your password"
 
         user_label_rel_pos = self.assign_widget_position(label_size, 0.5, 0.20)
-        username_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.5, 0.3)
+        user_name_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.5, 0.3)
         password_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.5, 0.4)
         login_button_rel_pos = self.assign_widget_position(login_button_size, 0.5, 0.5)
 
         label = UILabel(relative_rect=pygame.Rect(user_label_rel_pos, label_size), text= user_label_text, manager=self.Manager)
-        username_entry = UITextEntryLine(relative_rect=pygame.Rect(username_entry_rel_pos, text_entry_size),placeholder_text= username_entry_placeholder, manager=self.Manager)
+        username_entry = UITextEntryLine(relative_rect=pygame.Rect(user_name_entry_rel_pos, text_entry_size),placeholder_text= user_name_entry_placeholder, manager=self.Manager)
         password_entry = UITextEntryLine(relative_rect=pygame.Rect(password_entry_rel_pos, text_entry_size),placeholder_text= password_entry_placeholder, manager=self.Manager)
         button = UIButton(relative_rect=pygame.Rect(login_button_rel_pos, login_button_size), text= login_button_text, manager=self.Manager)
 
     def build_register_interface(self):
 
         label_size = 200,50
-        login_button_size = 100,50
-        text_entry_size = 200,50
+        register_button_size = 100,50
+        text_entry_size = 165,50
+        address_entry_size = 300,50
 
         user_label_text = "Create your account"
-        login_button_text = "Register"
-        username_entry_placeholder = "Enter your username"
+        user_name_entry_placeholder = "Enter your name"
+        user_surname_entry_placeholder = "Enter your surname"
+        email_entry_placeholder = "Enter your email"
+        role_entry_placeholder = 'Enter your role'
+        address_entry_placeholder = "Enter your address"
         password_entry_placeholder = "Enter your password"
         confirm_password_entry_placeholder = "Confirm your password"
+        register_button_text = "Register"
 
         user_label_rel_pos = self.assign_widget_position(label_size, 0.5, 0.20)
-        username_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.5, 0.3)
-        password_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.5, 0.4)
-        confirm_password_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.5, 0.5)
-        login_button_rel_pos = self.assign_widget_position(login_button_size, 0.5, 0.6)
+        user_name_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.61, 0.3)
+        user_surname_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.39,0.3)
+        email_entry_rel_pos = self.assign_widget_position(text_entry_size,0.39,0.4)
+        role_entry_rel_pos = self.assign_widget_position(text_entry_size,0.61,0.4)
+        address_entry_rel_pos = self.assign_widget_position(address_entry_size,0.5,0.5)
+        password_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.39, 0.6)
+        confirm_password_entry_rel_pos = self.assign_widget_position(text_entry_size, 0.61, 0.6)
+        login_button_rel_pos = self.assign_widget_position(register_button_size, 0.5, 0.7)
 
         label = UILabel(relative_rect=pygame.Rect(user_label_rel_pos, label_size), text= user_label_text, manager=self.Manager)
-        username_entry = UITextEntryLine(relative_rect=pygame.Rect(username_entry_rel_pos, text_entry_size),placeholder_text= username_entry_placeholder, manager=self.Manager)
+        user_name_entry = UITextEntryLine(relative_rect=pygame.Rect(user_name_entry_rel_pos, text_entry_size),placeholder_text= user_name_entry_placeholder, manager=self.Manager)
+        user_surname_entry = UITextEntryLine(relative_rect=pygame.Rect(user_surname_entry_rel_pos, text_entry_size),placeholder_text= user_surname_entry_placeholder, manager=self.Manager)
+        email_entry = UITextEntryLine(relative_rect=pygame.Rect(email_entry_rel_pos, text_entry_size),placeholder_text= email_entry_placeholder, manager=self.Manager)
+        role_entry = UITextEntryLine(relative_rect=pygame.Rect(role_entry_rel_pos, text_entry_size),placeholder_text= role_entry_placeholder, manager=self.Manager)
         password_entry = UITextEntryLine(relative_rect=pygame.Rect(password_entry_rel_pos, text_entry_size),placeholder_text= password_entry_placeholder, manager=self.Manager)
         confirm_password_entry = UITextEntryLine(relative_rect=pygame.Rect(confirm_password_entry_rel_pos, text_entry_size),placeholder_text= confirm_password_entry_placeholder, manager=self.Manager)
-        button = UIButton(relative_rect=pygame.Rect(login_button_rel_pos, login_button_size), text= login_button_text, manager=self.Manager)
+        address_entry = UITextEntryLine(relative_rect=pygame.Rect(address_entry_rel_pos, address_entry_size),placeholder_text= address_entry_placeholder, manager=self.Manager)
+        register_button = UIButton(relative_rect=pygame.Rect(login_button_rel_pos, register_button_size), text= register_button_text, manager=self.Manager)
     
     def build_back_button(self):
         button_size = 100,50
@@ -138,12 +153,13 @@ class App():
         if self.active_window == 'register_interface':
             self.active_window = 'main_interface'    
 
-    def register_account(self, username, password):
+    def register_account(self, user_type, user_name, user_surname, user_password, user_address, user_email):
         self.connect_db("Database.db")
-        self.cursor.execute("INSERT INTO User (Name, Hashed_Password) VALUES (?,?)",(username,password))
+        self.cursor.execute("INSERT INTO User (User_type, Name, Surname, Hashed_Password, Address, Email) VALUES (?,?,?,?,?,?)",(user_type,user_name,user_surname,user_password,user_address, user_email))
         self.conn.commit ()
+        self.conn.close()
 
-    def check_user_credentials(self, username, password):
+    def check_user_credentials(self, user_email, user_password):
         pass
 
     def event_process(self,event):
@@ -167,7 +183,7 @@ class App():
         clock = pygame.time.Clock()
         self.build_main_interface()
         self.build_back_button()
-        self.register_account('un_test','pw_test')
+        self.register_account('Admin','NamTest','SurNamTest','PWD_test','addressTest','Test@gmail.com')
         while True:
             time_delta = clock.tick(Framerate)
 
